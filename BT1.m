@@ -22,7 +22,7 @@ function varargout = BT1(varargin)
 
 % Edit the above text to modify the response to help BT1
 
-% Last Modified by GUIDE v2.5 19-Oct-2018 15:55:38
+% Last Modified by GUIDE v2.5 19-Oct-2018 16:27:28
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -87,7 +87,7 @@ if any(ismember(fields(handles),'isImported'))
 
 
         %plot(x,y);
-        histogram(x,y./length(diemTongKet)*100,'COUNT');
+        histogram(diemTongKet,x);
         axis([0 10 0 20]);
         
     else
@@ -448,3 +448,37 @@ function radiobutton3_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of radiobutton3
+
+
+% --- Executes on button press in radiobutton4.
+function radiobutton4_Callback(hObject, eventdata, handles)
+% hObject    handle to radiobutton4 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of radiobutton4
+
+
+% --- Executes on button press in radiobutton5.
+function radiobutton5_Callback(hObject, eventdata, handles)
+% hObject    handle to radiobutton5 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of radiobutton5
+
+
+% --- Executes on button press in radiobutton6.
+function radiobutton6_Callback(hObject, eventdata, handles)
+% hObject    handle to radiobutton6 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of radiobutton6
+
+
+% --------------------------------------------------------------------
+function uibuttongroup2_ButtonDownFcn(hObject, eventdata, handles)
+% hObject    handle to uibuttongroup2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
