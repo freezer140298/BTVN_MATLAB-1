@@ -22,7 +22,7 @@ function varargout = BT1(varargin)
 
 % Edit the above text to modify the response to help BT1
 
-% Last Modified by GUIDE v2.5 18-Oct-2018 22:51:45
+% Last Modified by GUIDE v2.5 19-Oct-2018 15:55:38
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -86,8 +86,8 @@ if any(ismember(fields(handles),'isImported'))
         y = hist(diemTongKet,x);
 
 
-        plot(x,y);
-        bar(x,y./length(diemTongKet)*100);
+        %plot(x,y);
+        histogram(x,y./length(diemTongKet)*100,'COUNT');
         axis([0 10 0 20]);
         
     else
@@ -421,3 +421,30 @@ if all(ismember(str,'1234567890.'))
 else
     flag = false;
 end
+
+
+% --- Executes on button press in radiobutton1.
+function radiobutton1_Callback(hObject, eventdata, handles)
+% hObject    handle to radiobutton1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of radiobutton1
+
+
+% --- Executes on button press in radiobutton2.
+function radiobutton2_Callback(hObject, eventdata, handles)
+% hObject    handle to radiobutton2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of radiobutton2
+
+
+% --- Executes on button press in radiobutton3.
+function radiobutton3_Callback(hObject, eventdata, handles)
+% hObject    handle to radiobutton3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of radiobutton3
