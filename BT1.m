@@ -22,7 +22,7 @@ function varargout = BT1(varargin)
 
 % Edit the above text to modify the response to help BT1
 
-% Last Modified by GUIDE v2.5 19-Oct-2018 16:27:28
+% Last Modified by GUIDE v2.5 21-Oct-2018 10:48:34
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -82,14 +82,34 @@ if any(ismember(fields(handles),'isImported'))
     if handles.isImported == true
         %ax = axes(handles.axes1);
         x = [0:0.5:10]; % x axis
-        diemTongKet = handles.diemTongKet; % y axis
-        y = hist(diemTongKet,x);
-
-
-        %plot(x,y);
-        histogram(diemTongKet,x);
-        axis([0 10 0 20]);
         
+        % Get data from handles(guidata)
+        diemTongKet = handles.diemTongKet;
+        diemGK = handles.diemGK;
+        diemCK = handles.diemCK;
+        
+        % Selection
+        switch(handles.btnGroupFlag)
+            case 1
+                y = diemTongKet;
+            case 2
+                y = diemGK;
+            case 3
+                y = diemCK;
+        end
+        
+        % Graphical form
+        switch(handles.popUpFlag)
+            case 1
+                h = histogram(y,x);
+                %bar(x,y);
+            case 2
+                h = histcounts(y,x,'Normalization','probability') .* 100;
+                plot(y,x);
+                bar(y,x);
+        end
+        
+        axis([0 10 0 20]);
     else
         
     end
@@ -284,7 +304,26 @@ function figureStylePopup_Callback(hObject, eventdata, handles)
 
 % Hints: contents = cellstr(get(hObject,'String')) returns figureStylePopup contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from figureStylePopup
+       
+% Determine the selected data set
+str = get(hObject,'String');
+val = get(hObject,'Value');
 
+% Set current data to the selected data set
+switch(str{val})
+    case 'Theo so luong'
+        flag = 1;
+    case 'Theo phan tram'
+        flag = 2;
+    case 'Pho diem'
+        flag = 3;
+    case 'Pie'
+        flag = 4;
+end
+
+handles.popUpFlag = flag;
+guidata(hObject,handles);
+    
 
 % --- Executes during object creation, after setting all properties.
 function figureStylePopup_CreateFcn(hObject, eventdata, handles)
@@ -297,6 +336,9 @@ function figureStylePopup_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+handles.popUpFlag = 1;
+guidata(hObject,handles);
 
 
 
@@ -478,7 +520,37 @@ function radiobutton6_Callback(hObject, eventdata, handles)
 
 
 % --------------------------------------------------------------------
-function uibuttongroup2_ButtonDownFcn(hObject, eventdata, handles)
-% hObject    handle to uibuttongroup2 (see GCBO)
+function uibuttongroup1_ButtonDownFcn(hObject, eventdata, handles)
+% hObject    handle to uibuttongroup1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes when selected object is changed in uibuttongroup1.
+function uibuttongroup1_SelectionChangedFcn(hObject, eventdata, handles)
+% hObject    handle to the selected object in uibuttongroup1 
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+str = get(handles.uibuttongroup1,'SelectedObject');
+selection = get(str,'Tag');
+
+switch selection
+    case 'finalRadio'
+        val = 1;
+    case 'midRadio'
+        val = 2;
+    case 'endRadio'
+        val = 3;
+end
+handles.btnGroupFlag = val;
+guidata(hObject,handles);
+
+
+% --- Executes during object creation, after setting all properties.
+function uibuttongroup1_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to uibuttongroup1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+handles.btnGroupFlag = 1;
+guidata(hObject,handles);
