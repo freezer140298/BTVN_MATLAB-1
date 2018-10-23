@@ -110,14 +110,10 @@ if any(ismember(fields(handles),'isImported'))
                 plot(h,x);
                 bar(x,h);
                 if(handles.btnGroupFlag ~= 4)
-                    xlim([-0.2 10.2]);
-                    xlabel('Diem');
-                    ylabel('So luong');
-                    
-                    set(gca,'XTick',0:0.5:10);
+                    axis([-0.2 10.2 0 10]);
+                    xlim(
                 else
-                    xlim([-0.5 1.5]);
-                    set(gca,'XTick',0:1:1);
+                    %xlim([-0.2 1.2]);
                     set(gca,'XTickLabel',{'Rot','Dau'});
                 end
                 
@@ -162,7 +158,7 @@ if any(ismember(fields(handles),'isImported'))
 
         xlswrite(excelFileNameStr,result,xlXepLoaiRange);
         
-        msgbox('Exported successfully');
+        msgbox('Exported successfully\nPlease re-import file');
     end
 else
         msgbox('Need to import Excel file first!');
@@ -465,7 +461,7 @@ if any(ismember(fields(handles),'isImported'))
 
             xlswrite(excelFileNameStr,cellData,cellIndex); 
             
-            msgbox('Added successfully\nPlease re-import file');
+            msgbox('Added successfully');
         end
     end
 else
